@@ -1,0 +1,13 @@
+{
+  "appName": "My App",
+  "build": {
+    "var": "App",
+    "filename": "app"
+  },
+  "dev": {
+    "port": 8080
+  },
+  "tests": {
+    "port": 9000
+  }
+}
