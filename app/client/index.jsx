@@ -1,45 +1,49 @@
 'use strict';
 
-import React from 'react';
-import Phaser from 'phaser';
-import style from './style';
+import React, { PropTypes } from 'react';
+import { Router, Route, hashHistory } from 'react-router';
+import Login from './components/login';
+import Game from './components/game';
+import config from '../config';
+import './style';
 
-const mountingPoint = 'gane-mounting-point';
+function RouteWrapper({ route }) {
+  return (
+    <route.child config={ config } />
+  );
+}
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+RouteWrapper.displayName = 'RouteWrapper';
+RouteWrapper.propTypes = {
+  route: PropTypes.object.isRequired
+};
 
-  componentDidMount() {
-    this.game = new Phaser.Game(480, 320, Phaser.AUTO, mountingPoint, {
-      preload: this.preload.bind(this),
-      create: this.create.bind(this),
-      update: this.update.bind(this)
-    });
-  }
+function NoMatch() {
+  return (
+    <h1>404</h1>
+  );
+}
 
-  preload() {
-    this.game.scale.scaleMode = Phaser.ScaleManager.RESIZE;
-    this.game.stage.backgroundColor = '#eee';
-  }
+NoMatch.displayName = 'NoMatch';
 
-  create() {
-    console.log('Created');
-  }
-
-  update() {}
-
-  render() {
-    return (
-      <div
-        className={ style.game }
-        id={ mountingPoint }
+export default function App() {
+  return (
+    <Router history={ hashHistory }>
+      <Route
+        component={ Login }
+        path='/'
       />
-    );
-  }
+      <Route
+        child={ Game }
+        component={ RouteWrapper }
+        path='/game'
+      />
+      <Route
+        component={ NoMatch }
+        path='*'
+      />
+    </Router>
+  );
 }
 
 App.displayName = 'App';
-App.propTypes = {};

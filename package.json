@@ -7,7 +7,8 @@
     "build": "node scripts/build",
     "clean": "node scripts/clean",
     "lint": "node scripts/lint",
-    "start": "node scripts/start",
+    "start-client": "node scripts/start",
+    "start-server": "node app/server",
     "test": "node scripts/tests"
   },
   "repository": {
@@ -22,10 +23,12 @@
   "homepage": "https://github.com/simonrelet/planetarium#readme",
   "dependencies": {
     "classnames": "^2.2.5",
+    "immutable": "^3.8.1",
     "phaser": "^2.6.2",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
-    "react-router": "^2.6.1"
+    "react-router": "^2.6.1",
+    "socket.io": "^1.4.8"
   },
   "eslintConfig": {
     "extends": "react-simonrelet"
