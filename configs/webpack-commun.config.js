@@ -12,7 +12,7 @@ module.exports = function() {
           loader: 'babel-loader'
         },
         {
-          test: /\.svg$/,
+          test: /\.(svg|png)$/,
           loader: 'file-loader'
         },
         {
@@ -27,6 +27,9 @@ module.exports = function() {
     resolve: {
       modulesDirectories: [ 'node_modules' ],
       root: resolve([ 'app', 'client' ]),
+      alias: {
+        utils: resolve([ 'app', 'client', 'utils' ])
+      },
       extensions: [ '', '.js', '.jsx', '.scss', '.json' ]
     }
   };
