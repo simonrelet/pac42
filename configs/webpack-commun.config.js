@@ -22,9 +22,11 @@ module.exports = function() {
       ]
     },
 
+    externals: { phaser: 'Phaser' },
+
     resolve: {
       modulesDirectories: [ 'node_modules' ],
-      root: resolve([ 'app' ]),
+      root: resolve([ 'app', 'client' ]),
       extensions: [ '', '.js', '.jsx', '.scss', '.json' ]
     }
   };

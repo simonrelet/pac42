@@ -40,7 +40,9 @@ Promise.resolve()
   .then(() => copyFile({ src: paths.react, dst: paths.outputDir }))
   .then(() => log(`  ${paths.react} => ${paths.outputDir}/`))
   .then(() => copyFile({ src: paths.reactDOM, dst: paths.outputDir }))
-  .then(() => log(`  ${paths.reactDOM} => ${paths.outputDir}/\n`))
+  .then(() => log(`  ${paths.reactDOM} => ${paths.outputDir}/`))
+  .then(() => copyFile({ src: paths.phaser, dst: paths.outputDir }))
+  .then(() => log(`  ${paths.phaser} => ${paths.outputDir}/\n`))
   .then(() => process.exit(0))
   .catch(err => {
     console.error(err);

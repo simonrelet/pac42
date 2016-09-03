@@ -22,10 +22,7 @@ module.exports = function(options) {
 
     entry: [ options.entry ],
 
-    externals: {
-      react: 'React',
-      phaser: 'Phaser'
-    },
+    externals: { react: 'React' },
 
     output: {
       path: options.outputDir,

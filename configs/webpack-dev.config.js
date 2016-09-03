@@ -28,8 +28,6 @@ module.exports = function(options) {
       publicPath: '/'
     },
 
-    externals: { phaser: 'Phaser' },
-
     module: {
       loaders: [{
         test: /\.scss$/,

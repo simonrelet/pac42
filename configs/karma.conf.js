@@ -3,7 +3,7 @@
 const resolve = require('../tools/path-resolve')([ __dirname, '..' ]);
 const webpackTestsConfig = require('./webpack-tests.config.js');
 
-const entry = resolve([ 'app', 'tests', 'entry.js' ]);
+const entry = resolve([ 'app', 'client', 'tests', 'entry.js' ]);
 const polyfill = resolve([ 'node_modules', 'babel-polyfill', 'dist', 'polyfill.js' ]);
 
 module.exports = function(config) {

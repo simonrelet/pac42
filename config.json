@@ -1,8 +1,8 @@
 {
-  "appName": "My App",
+  "appName": "Pac42",
   "build": {
-    "var": "App",
-    "filename": "app"
+    "var": "pac42",
+    "filename": "index"
   },
   "dev": {
     "port": 8080
