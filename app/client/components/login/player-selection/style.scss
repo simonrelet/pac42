@@ -1,7 +1,32 @@
-.playerClass {
+@import '~utils/utils';
+
+.player-class {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.player-blocks {
   align-items: center;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin: 50px 0px;
+
+  > *:not(:first-child) {
+    margin-left: 25px;
+  }
+}
+
+.title {
+  @include text;
+  font-size: 1.25rem;
+  font-style: italic;
+  margin-bottom: 15px;
+}
+
+.sub-title {
+  @include text;
+  font-size: 1rem;
+  font-style: italic;
 }

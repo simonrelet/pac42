@@ -31,14 +31,18 @@ const PacmanBlock = playerBlock(
 export default function PlayerSelection({ selected, onSelection }) {
   return (
     <div className={ style.playerClass }>
-      <GhostBlock
-        selected={ selected === 'ghost' }
-        onSelect={ () => onSelection('ghost') }
-      />
-      <PacmanBlock
-        selected={ selected === 'pacman' }
-        onSelect={ () => onSelection('pacman') }
-      />
+      <h3 className={ style.title }>Join a team</h3>
+      <div className={ style.playerBlocks }>
+        <GhostBlock
+          selected={ selected === 'ghost' }
+          onSelect={ () => onSelection('ghost') }
+        />
+        <div className={ style.subTitle }>VS</div>
+        <PacmanBlock
+          selected={ selected === 'pacman' }
+          onSelect={ () => onSelection('pacman') }
+        />
+      </div>
     </div>
   );
 }

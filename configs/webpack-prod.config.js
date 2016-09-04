@@ -38,7 +38,7 @@ module.exports = function(options) {
         exclude: /node_modules/,
         loader: extractTextPlugin.extract(
           'style',
-          'css?modules&importLoaders=1!sass'
+          'css?modules&importLoaders=1&camelCase!sass'
         )
       }]
     },

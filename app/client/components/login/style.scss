@@ -1,4 +1,4 @@
-@import '~utils/constants';
+@import '~utils/utils';
 
 .login {
   align-items: center;
@@ -7,13 +7,15 @@
   flex-direction: column;
   height: 100%;
   justify-content: center;
+
+  > *:not(:first-child) {
+    margin-top: 50px;
+  }
 }
 
 .title {
-  color: $foreground-color;
+  @include text;
   font-size: 4rem;
-  font-weight: normal;
-  margin: 0;
 }
 
 .form {
