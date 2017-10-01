@@ -1,0 +1,11 @@
+.Pellets {
+  position: absolute;
+}
+
+.Pellet {
+  position: absolute;
+  height: 16px;
+  width: 16px;
+  background-repeat: no-repeat;
+  background-image: url(./tiles.png);
+}

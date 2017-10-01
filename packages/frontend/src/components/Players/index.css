@@ -1,0 +1,31 @@
+.Players {
+  position: absolute;
+}
+
+.Player {
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  background-repeat: no-repeat;
+}
+
+.Player-pacman {
+  background-image: url(./sprites/pacman.png);
+}
+
+.Player-ghost,
+.Player-ghost-red {
+  background-image: url(./sprites/blinky.png);
+}
+
+.Player-ghost-pink {
+  background-image: url(./sprites/pinky.png);
+}
+
+.Player-ghost-yellow {
+  background-image: url(./sprites/clyde.png);
+}
+
+.Player-ghost-cyan {
+  background-image: url(./sprites/inky.png);
+}
