@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import socketIO from 'socket.io-client';
+import extractWalls from './extractWalls';
+import getSVGPaths from './getSVGPaths';
 import Map from '../Map';
-// import Pellets from '../Pellets';
 import Players from '../Players';
 import './index.css';
 
@@ -10,7 +11,7 @@ const handleJSON = cb => data => cb(JSON.parse(data));
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { map: null, players: [] };
+    this.state = { map: null, players: [], paths: [] };
   }
 
   componentDidMount() {
@@ -19,7 +20,10 @@ class App extends Component {
     socket.on(
       'map',
       handleJSON(map => {
-        this.setState({ map });
+        this.setState({
+          map,
+          paths: getSVGPaths(extractWalls(map.tiles), map.tiles[0].length),
+        });
       }),
     );
 
@@ -31,24 +35,31 @@ class App extends Component {
     );
   }
 
-  render() {
-    const { map, players } = this.state;
-    const style = map
-      ? {
-          height: 16 * map.tiles.length,
-          width: 16 * map.tiles[0].length,
-        }
-      : {};
+  renderMap() {
+    const { map, players, paths } = this.state;
+    const nbLines = map.tiles.length;
+    const nbColumns = map.tiles[0].length;
+    const height = 16 * nbLines;
+    const width = 16 * nbColumns;
+    const size = { height, width };
 
     return (
-      <div className="App">
-        <div style={style} className="App-map">
-          {map && <Map style={style} tiles={map.tiles} />}
-          {/*map && pellets && <Pellets size={map.size} items={pellets} />*/}
-          {map && players && <Players style={style} players={players} />}
-        </div>
+      <div style={size} className="App-map">
+        <Map paths={paths} size={size} />
+        <Players size={size} players={players} />
       </div>
     );
+  }
+
+  render() {
+    const { map, players } = this.state;
+    let content;
+    if (map && players) {
+      content = this.renderMap();
+    } else {
+      content = <div>Loading...</div>;
+    }
+    return <div className="App">{content}</div>;
   }
 }
 
