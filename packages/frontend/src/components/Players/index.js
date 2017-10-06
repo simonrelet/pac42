@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import injectSheet from 'react-jss';
 import Pacman from '../Pacman';
-import './index.css';
+import styles from './styles';
 
 const switchType = player => {
   if (player.type === 'pacman') {
@@ -10,12 +11,12 @@ const switchType = player => {
   return null;
 };
 
-const Players = ({ players, size: { height, width } }) => {
+const Players = ({ classes, players, size: { height, width } }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox={`0 0 ${width} ${height}`}
-      className="Players"
+      className={classes.players}
       height={height}
       width={width}
     >
@@ -25,8 +26,9 @@ const Players = ({ players, size: { height, width } }) => {
 };
 
 Players.propTypes = {
+  classes: PropTypes.object.isRequired,
   size: PropTypes.object.isRequired,
   players: PropTypes.array.isRequired,
 };
 
-export default Players;
+export default injectSheet(styles)(Players);
