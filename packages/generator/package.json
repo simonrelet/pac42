@@ -1,9 +1,12 @@
 {
   "name": "generator",
   "version": "0.1.0",
-  "description": "",
   "private": true,
   "main": "build/index.js",
+  "engines": {
+    "node": "^8.1.0",
+    "yarn": "^1.0.0"
+  },
   "scripts": {
     "build": "babel -d build --copy-files lib",
     "clean": "rm -rf build",

@@ -1,16 +1,20 @@
 {
   "name": "pac42",
   "version": "0.1.0",
-  "description": "Online multiplayer Pacman game",
+  "description": "Online multi-agent system Pacman game",
+  "author": "Simon Relet",
   "private": true,
+  "license": "MIT",
+  "homepage": "https://github.com/simonrelet/pac42#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/simonrelet/pac42.git"
   },
-  "author": "Simon Relet",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/simonrelet/pac42/issues"
   },
-  "homepage": "https://github.com/simonrelet/pac42#readme"
+  "engines": {
+    "node": "^8.1.0",
+    "yarn": "^1.0.0"
+  }
 }

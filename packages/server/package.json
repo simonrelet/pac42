@@ -1,14 +1,25 @@
 {
   "name": "server",
   "version": "0.1.0",
-  "description": "",
   "private": true,
   "main": "build/index.js",
+  "engines": {
+    "node": "^8.1.0",
+    "yarn": "^1.0.0"
+  },
   "scripts": {
     "build": "babel -d build --copy-files app",
     "clean": "rm -rf build",
     "lint": "eslint .",
     "start": "env DEVELOPMENT=1 babel-node app"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.4",
+    "lodash.find": "^4.6.0",
+    "morgan": "^1.8.2",
+    "socket.io": "^2.0.3"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -22,13 +33,5 @@
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.3.0",
     "prettier": "^1.7.0"
-  },
-  "dependencies": {
-    "body-parser": "^1.18.2",
-    "cookie-parser": "^1.4.3",
-    "express": "^4.15.4",
-    "lodash.find": "^4.6.0",
-    "morgan": "^1.8.2",
-    "socket.io": "^2.0.3"
   }
 }
