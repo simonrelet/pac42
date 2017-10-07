@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { withTheme } from 'react-jss';
 import PropTypes from 'prop-types';
-import getPathForDirection from './getPathForDirection';
+import getEyesForDirection from './getEyesForDirection';
 
 const nbSteps = 32;
-const getMouthX = step => 15 - Math.abs(0.5 * (step - 16));
+const getAmplitude = step => Math.abs(0.5 * (step - 16)) - 4;
 
-class Pacman extends Component {
+class Ghost extends Component {
   static propTypes = {
     pos: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
@@ -36,22 +36,23 @@ class Pacman extends Component {
     const { step } = this.state;
     const centerY = pos.y + 8;
     const centerX = pos.x + 8;
-    const mouthX = getMouthX(step);
+    const amplitude = getAmplitude(step);
     const fill = theme.playerColors[id];
 
-    if (mouthX === 15 /* || !direction*/) {
-      return <circle cx={centerX} cy={centerY} r="15" fill={fill} />;
-    }
+    const path =
+      `M${centerX - 15},${centerY + 12}` +
+      'c0,-17 0,-27 15,-27 s15,10 15,27' +
+      `c0,${amplitude} -4,${amplitude} -6,0 s-4,${-amplitude} -6,0 s-4,${amplitude} -6,0 s-4,${-amplitude} -6,0 s-6,${amplitude} -6,0`;
 
-    const mouthY = Math.sqrt(15 ** 2 - mouthX ** 2);
-    const path = getPathForDirection(
-      direction,
-      { centerX, centerY },
-      { mouthX, mouthY },
+    const eyes = getEyesForDirection(direction, { centerX, centerY });
+
+    return (
+      <g>
+        <path d={path} fill={fill} />
+        {eyes}
+      </g>
     );
-
-    return <path d={path} fill={fill} />;
   }
 }
 
-export default withTheme(Pacman);
+export default withTheme(Ghost);

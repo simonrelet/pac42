@@ -4,15 +4,31 @@ import socketIO from 'socket.io-client';
 import injectSheet from 'react-jss';
 import extractWalls from './extractWalls';
 import getSVGPaths from './getSVGPaths';
+import Toogle from '../Toogle';
 import Map from '../Map';
 import Players from '../Players';
-import styles from './styles';
+
+const styles = theme => ({
+  game: {
+    color: theme.color,
+    minHeight: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  gameMap: {
+    margin: [20, 0],
+  },
+});
 
 const handleJSON = cb => data => cb(JSON.parse(data));
 
 class Game extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
+    onChangeTheme: PropTypes.func.isRequired,
+    themeName: PropTypes.string.isRequired,
   };
 
   state = {
@@ -52,7 +68,7 @@ class Game extends Component {
     const size = { height, width };
 
     return (
-      <div style={size} className={classes.appMap}>
+      <div style={size} className={classes.gameMap}>
         <Map paths={paths} size={size} />
         <Players size={size} players={players} />
       </div>
@@ -61,7 +77,7 @@ class Game extends Component {
 
   render() {
     const { map, players } = this.state;
-    const { classes } = this.props;
+    const { classes, onChangeTheme, themeName } = this.props;
 
     let content;
     if (map && players) {
@@ -69,7 +85,12 @@ class Game extends Component {
     } else {
       content = <div>Loading...</div>;
     }
-    return <div className={classes.app}>{content}</div>;
+    return (
+      <div className={classes.game}>
+        {content}
+        <Toogle onChange={onChangeTheme}>{themeName}</Toogle>
+      </div>
+    );
   }
 }
 

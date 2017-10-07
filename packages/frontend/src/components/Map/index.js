@@ -1,7 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
-import styles from './styles';
+
+const styles = theme => ({
+  map: {
+    fill: theme.walls.fill,
+    position: 'absolute',
+    stroke: theme.walls.borderColor,
+    strokeWidth: theme.walls.borderWidth,
+  },
+});
 
 const Map = ({ classes, paths, size: { height, width } }) => {
   return (

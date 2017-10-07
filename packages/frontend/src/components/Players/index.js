@@ -2,13 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
 import Pacman from '../Pacman';
-import styles from './styles';
+import Ghost from '../Ghost';
 
-const switchType = player => {
-  if (player.type === 'pacman') {
-    return <Pacman key={player.id} {...player} />;
+const styles = theme => ({
+  players: {
+    position: 'absolute',
+  },
+});
+
+const getPlayer = ({ type }) => {
+  switch (type) {
+    case 'pacman':
+      return Pacman;
+    case 'ghost':
+    default:
+      return Ghost;
   }
-  return null;
 };
 
 const Players = ({ classes, players, size: { height, width } }) => {
@@ -20,7 +29,10 @@ const Players = ({ classes, players, size: { height, width } }) => {
       height={height}
       width={width}
     >
-      {players.map(switchType)}
+      {players.map(player => {
+        const Player = getPlayer(player);
+        return <Player key={player.id} {...player} />;
+      })}
     </svg>
   );
 };

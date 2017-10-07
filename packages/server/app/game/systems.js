@@ -11,10 +11,10 @@ const PLAYERS_AI = [
   random({ name: 'Liza', type: 'pacman' }),
   random({ name: 'Frank', type: 'pacman' }),
   random({ name: 'Bob', type: 'pacman' }),
-  random({ name: 'Blinky', type: 'ghost-red' }),
-  random({ name: 'Pinky', type: 'ghost-pink' }),
-  random({ name: 'Clyde', type: 'ghost-yellow' }),
-  random({ name: 'Inky', type: 'ghost-cyan' }),
+  random({ name: 'Blinky', type: 'ghost' }),
+  random({ name: 'Pinky', type: 'ghost' }),
+  random({ name: 'Clyde', type: 'ghost' }),
+  random({ name: 'Inky', type: 'ghost' }),
 ];
 const logger = loggers('system');
 
