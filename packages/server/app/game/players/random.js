@@ -15,16 +15,25 @@ const create = (logger, id, map) => {
     path: null,
   };
 
+  const resetState = () => {
+    state.destinationPos = null;
+    state.path = null;
+  };
+
   return {
     play: environment => {
       const my = environment.state.players.find(p => p.id === id);
+      if (my.state !== 'alive') {
+        resetState();
+        return;
+      }
+
       const currentPos = toTilePosition(my.pos);
 
       logger.info('Current position:', currentPos);
 
       if (isEqual(currentPos, state.destinationPos)) {
-        state.destinationPos = null;
-        state.path = null;
+        resetState();
       }
 
       if (!state.destinationPos) {

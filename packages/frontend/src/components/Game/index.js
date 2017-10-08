@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import socketIO from 'socket.io-client';
+import changeCase from 'change-case';
 import injectSheet from 'react-jss';
 import extractWalls from './extractWalls';
 import getSVGPaths from './getSVGPaths';
 import Toogle from '../Toogle';
 import Map from '../Map';
+import Pellets from '../Pellets';
 import Players from '../Players';
 
 const styles = theme => ({
@@ -33,6 +35,7 @@ class Game extends Component {
 
   state = {
     map: null,
+    pellets: [],
     players: [],
     paths: [],
   };
@@ -52,14 +55,14 @@ class Game extends Component {
 
     socket.on(
       'update',
-      handleJSON(({ players }) => {
-        this.setState({ players });
+      handleJSON(({ players, pellets }) => {
+        this.setState({ players, pellets });
       }),
     );
   }
 
   renderMap() {
-    const { map, players, paths } = this.state;
+    const { map, players, paths, pellets } = this.state;
     const { classes } = this.props;
     const nbLines = map.tiles.length;
     const nbColumns = map.tiles[0].length;
@@ -70,7 +73,8 @@ class Game extends Component {
     return (
       <div style={size} className={classes.gameMap}>
         <Map paths={paths} size={size} />
-        <Players size={size} players={players} />
+        <Pellets pellets={pellets} size={size} nbColumns={nbColumns} />
+        <Players players={players} size={size} />
       </div>
     );
   }
@@ -88,7 +92,9 @@ class Game extends Component {
     return (
       <div className={classes.game}>
         {content}
-        <Toogle onChange={onChangeTheme}>{themeName}</Toogle>
+        <Toogle onChange={onChangeTheme}>
+          {changeCase.sentenceCase(themeName)}
+        </Toogle>
       </div>
     );
   }

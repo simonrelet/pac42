@@ -32,7 +32,11 @@ class Pacman extends Component {
   };
 
   render() {
-    const { pos, direction, id, theme } = this.props;
+    const { pos, direction, id, state, theme } = this.props;
+    if (state !== 'alive') {
+      return null;
+    }
+
     const { step } = this.state;
     const centerY = pos.y + 8;
     const centerX = pos.x + 8;

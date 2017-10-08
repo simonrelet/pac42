@@ -1,37 +1,52 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import './index.css';
+import injectSheet from 'react-jss';
 
-const Pellet = ({ line, column }) => {
-  const style = {
-    backgroundPositionX: -16 * 7,
-    top: line * 16,
-    left: column * 16,
-  };
-  return <div style={style} className="Pellet" />;
+const styles = theme => ({
+  pellets: {
+    position: 'absolute',
+  },
+  pellet: {
+    fill: theme.pellets.color,
+  },
+  superPellet: {
+    fill: theme.pellets.superColor,
+  },
+});
+
+const Pellet = ({ classes, type, pos: { line, column } }) => {
+  const centerX = column * 16 + 8;
+  const centerY = line * 16 + 8;
+  const radius = type === 'normal' ? 2 : 6;
+  const className = type === 'normal' ? classes.pellet : classes.superPellet;
+  return <circle cx={centerX} cy={centerY} r={radius} className={className} />;
 };
 
-class Pellets extends PureComponent {
-  render() {
-    const { size, items } = this.props;
-    const style = {
-      height: 16 * size.nbLines,
-      width: 16 * size.nbColumns,
-    };
-
-    return (
-      <div className="Pellets" style={style}>
-        {items.map(item => (
-          <Pellet key={item.line * size.nbColumns + item.column} {...item} />
-        ))}
-      </div>
-    );
-  }
-}
+const Pellets = ({ classes, pellets, nbColumns, size: { height, width } }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox={`0 0 ${width} ${height}`}
+      className={classes.pellets}
+      height={height}
+      width={width}
+    >
+      {pellets.map(pellet => (
+        <Pellet
+          key={pellet.pos.line * nbColumns + pellet.pos.column}
+          classes={classes}
+          {...pellet}
+        />
+      ))}
+    </svg>
+  );
+};
 
 Pellets.propTypes = {
+  classes: PropTypes.object.isRequired,
   size: PropTypes.object.isRequired,
-  items: PropTypes.array.isRequired,
+  nbColumns: PropTypes.number.isRequired,
+  pellets: PropTypes.array.isRequired,
 };
 
-export default Pellets;
+export default injectSheet(styles)(Pellets);
