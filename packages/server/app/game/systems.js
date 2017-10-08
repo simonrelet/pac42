@@ -27,13 +27,17 @@ const create = () => {
   PLAYERS_AI.forEach((playerAI, id) => {
     const player = players.create(id, playerAI, environment, map);
     playersInstances.push(player);
-    const position = map.getRandomPosition();
+
+    const position = map.getRandomTypedPosition(player);
+
     logger.info('Adding ' + player.name + ' at pos:', position);
+
     environment.dispatch(
       addPlayer({
         id,
         type: player.type,
         pos: toAbsolutePosition(position),
+        state: 'alive',
       }),
     );
   });

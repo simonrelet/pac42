@@ -10,6 +10,7 @@ const styles = theme => ({
     right: 20,
     border: [2, 'solid', theme.walls.fill],
     borderRadius: 4,
+    cursor: 'pointer',
     backgroundColor: theme.background,
     color: theme.color,
     font: 'inherit',

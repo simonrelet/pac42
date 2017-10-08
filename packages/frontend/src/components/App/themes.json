@@ -1,9 +1,13 @@
 {
   "light": {
     "color": "#757575",
-    "background": "#fff",
+    "background": "#eee",
     "walls": {
       "fill": "#bdbdbd"
+    },
+    "pellets": {
+      "color": "#757575",
+      "superColor": "#757575"
     },
     "playerColors": [
       "#1976D2",
@@ -14,13 +18,20 @@
       "#0097A7",
       "#E64A19",
       "#AFB42B"
-    ]
+    ],
+    "scaredGhost": {
+      "colors": ["#2962FF", "#fff"]
+    }
   },
   "dark": {
     "color": "#ccc",
     "background": "#424242",
     "walls": {
       "fill": "#616161"
+    },
+    "pellets": {
+      "color": "#9E9E9E",
+      "superColor": "#E0E0E0"
     },
     "playerColors": [
       "#2196F3",
@@ -31,6 +42,9 @@
       "#00BCD4",
       "#FF5722",
       "#CDDC39"
-    ]
+    ],
+    "scaredGhost": {
+      "colors": ["#2962FF", "#fff"]
+    }
   }
 }

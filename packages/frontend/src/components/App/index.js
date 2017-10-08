@@ -10,6 +10,14 @@ const styles = {
   },
 };
 
+const getThemeNameOrDefault = theme => {
+  const themeNames = Object.keys(themes);
+  if (themeNames.some(name => name === theme)) {
+    return theme;
+  }
+  return themeNames[0];
+};
+
 class App extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
@@ -17,7 +25,7 @@ class App extends Component {
 
   htmlElement = null;
   state = {
-    theme: localStorage.getItem('theme') || 'light',
+    theme: getThemeNameOrDefault(localStorage.getItem('theme')),
   };
 
   componentDidMount() {
@@ -33,7 +41,6 @@ class App extends Component {
   }
 
   handleChangeTheme = () => {
-    console.log('changing theme');
     this.setState(({ theme }) => {
       const newTheme = theme === 'light' ? 'dark' : 'light';
       localStorage.setItem('theme', newTheme);

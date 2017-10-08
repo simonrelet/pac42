@@ -19,6 +19,9 @@ const create = () => {
     get: () => state,
     dispatch: event => events.push(event),
     start: (applyEvent, stateWillChange) => {
+      // call once for initialisation
+      update(applyEvent, stateWillChange)();
+
       setInterval(update(applyEvent, stateWillChange), 40);
       logger.success('Started.');
     },
