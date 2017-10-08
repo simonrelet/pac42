@@ -42,12 +42,16 @@ var create = function create() {
   PLAYERS_AI.forEach(function (playerAI, id) {
     var player = _players2.default.create(id, playerAI, environment, map);
     playersInstances.push(player);
-    var position = map.getRandomPosition();
+
+    var position = map.getRandomTypedPosition(player);
+
     logger.info('Adding ' + player.name + ' at pos:', position);
+
     environment.dispatch((0, _rules.addPlayer)({
       id: id,
       type: player.type,
-      pos: (0, _positions.toAbsolutePosition)(position)
+      pos: (0, _positions.toAbsolutePosition)(position),
+      state: 'alive'
     }));
   });
   logger.success('Players added.');

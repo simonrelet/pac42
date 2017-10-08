@@ -28,18 +28,27 @@ var create = function create(logger, id, map) {
     path: null
   };
 
+  var resetState = function resetState() {
+    state.destinationPos = null;
+    state.path = null;
+  };
+
   return {
     play: function play(environment) {
       var my = environment.state.players.find(function (p) {
         return p.id === id;
       });
+      if (my.state !== 'alive') {
+        resetState();
+        return;
+      }
+
       var currentPos = (0, _positions.toTilePosition)(my.pos);
 
       logger.info('Current position:', currentPos);
 
       if ((0, _positions.isEqual)(currentPos, state.destinationPos)) {
-        state.destinationPos = null;
-        state.path = null;
+        resetState();
       }
 
       if (!state.destinationPos) {

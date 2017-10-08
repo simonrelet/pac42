@@ -37,6 +37,9 @@ var create = function create() {
       return events.push(event);
     },
     start: function start(applyEvent, stateWillChange) {
+      // call once for initialisation
+      update(applyEvent, stateWillChange)();
+
       setInterval(update(applyEvent, stateWillChange), 40);
       logger.success('Started.');
     }
