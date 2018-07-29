@@ -1,0 +1,19 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: #f6f6f6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0;
+  color: #333333;
+}

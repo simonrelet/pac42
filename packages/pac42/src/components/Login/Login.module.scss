@@ -1,0 +1,17 @@
+// @import 'adot-ui/build/sass-library'
+
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  // @include typography('display');
+  //*
+  font-family: 'Open Sans';
+  font-size: 32px;
+  font-weight: 300;
+  //*/
+
+  text-align: center;
+}

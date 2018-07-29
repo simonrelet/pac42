@@ -1,0 +1,95 @@
+@function map-get-or-default($map, $key, $default-value) {
+  @if map-has-key($map, $key) {
+    @return map-get($map, $key);
+  }
+
+  @return $default-value;
+}
+
+@function map-get-strict($map, $key) {
+  @if map-has-key($map, $key) {
+    @return map-get($map, $key);
+  }
+
+  @error "'#{$key}' is not in the map: #{$map}.";
+}
+
+$colors: (
+  main-green: (
+    base: rgb(63, 212, 139),
+  ),
+  main-blue: (
+    base: rgb(22, 44, 69),
+    dark: rgb(15, 31, 49),
+    dark-90: rgba(15, 31, 49, 0.9),
+  ),
+  main-grey: (
+    hover: rgb(246, 246, 246),
+    light: rgb(158, 158, 158),
+    mid: rgb(111, 111, 111),
+    dark: rgb(51, 51, 51),
+  ),
+  util-white: (
+    base: rgb(255, 255, 255),
+  ),
+  util-black: (
+    base: rgb(0, 0, 0),
+  ),
+  util-red: (
+    base: rgb(215, 6, 1),
+  ),
+);
+
+@function get-color($keys...) {
+  $map: $colors;
+  @each $key in $keys {
+    $map: map-get-strict($map, $key);
+  }
+  @return $map;
+}
+
+$elevations: (
+  (/* Use default values. */),
+  (
+    offset-y: 1,
+    blur-radius: 6,
+    color-opacity: 0.1,
+  ),
+  (
+    offset-y: 2,
+    blur-radius: 6,
+    color-opacity: 0.23,
+  ),
+  (
+    offset-y: 4,
+    blur-radius: 9,
+    color-opacity: 0.26,
+  ),
+  (
+    offset-y: 6,
+    blur-radius: 12,
+    color-opacity: 0.29,
+  ),
+  (
+    offset-y: 8,
+    blur-radius: 15,
+    color-opacity: 0.3,
+  )
+);
+
+@mixin elevation($level: 3) {
+  // Lists start at index 1...
+  @if $level + 1 > length($elevations) {
+    @error "There are only #{length($elevations)} levels of elevation, received: #{$level}";
+  }
+
+  $elevation: nth($elevations, $level + 1);
+  $offset-x: map-get-or-default($elevation, 'offset-x', 0);
+  $offset-y: map-get-or-default($elevation, 'offset-y', 0);
+  $blur-radius: map-get-or-default($elevation, 'blur-radius', 0);
+  $spread-radius: map-get-or-default($elevation, 'spread-radius', 0);
+  $color-opacity: map-get-or-default($elevation, 'color-opacity', 0);
+
+  box-shadow: #{$offset-x}px #{$offset-y}px #{$blur-radius}px #{$spread-radius}px
+    rgba(0, 0, 0, $color-opacity);
+}
